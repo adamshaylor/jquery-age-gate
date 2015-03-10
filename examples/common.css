@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+	background-color: #313131;
+    background-image: url('http://placehold.it/350x150/313131/FFFFFF&text=age%20restricted%20content');
+    background-repeat: repeat;
+    color: #d1d1d1;
+	font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.5em;
+}
+
+#age-gate-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    pointer-events: none;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+#age-gate-backdrop.active {
+    opacity: 0.8;
+    pointer-events: all;
+}
+
+#age-gate-dialog {
+	position: absolute;
+    left: 0;
+    right: 0;
+    top: -100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5em 1.25em 2em 1.25em;
+	width: 90%;
+	max-width: 400px;
+	max-height: 90%;
+    overflow: auto;
+	background-color: #414141;
+    -webkit-transition: top .5s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: top .5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+#age-gate-dialog.active {
+    top: 5%;
+}
+
+#age-gate-dialog h2 {
+    text-align: center;
+}
+
+#age-gate-dialog .error {
+    display: none;
+}
+
+#age-gate-dialog.invalid .error {
+    display: block;
+}
+
+#age-gate-dialog.invalid .prompt {
+    display: none;
+}
+
+#age-gate-dialog .age-gate-date-group {
+    margin-bottom: 1em;
+}
+
+#age-gate-dialog input[type="number"],
+#age-gate-dialog input[type="date"],
+#age-gate-dialog select,
+#age-gate-dialog button {
+    border-radius: 3px;
+    border-style: none;
+    padding: 0.625em 1em;
+	font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;    
+    font-size: 1em;
+}
+
+#age-gate-dialog input[type="number"],
+#age-gate-dialog input[type="date"],
+#age-gate-dialog select {
+    color: white;
+    background-color: #313131;
+}
+
+#age-gate-dialog input[type="date"] {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#age-gate-dialog input[name="age-gate-month"],
+#age-gate-dialog input[name="age-gate-day"] {
+    width: 3em;
+}
+
+#age-gate-dialog input[name="age-gate-year"] {
+    width: 5em;
+}
+
+#age-gate-dialog select {
+    -webkit-appearance: none;
+    display: block;
+    margin-bottom: 1em;
+}
+
+#age-gate-dialog button {
+    color: white;
+    cursor: pointer;
+}
+
+#age-gate-dialog button.age-gate-enter {
+    display: block;
+    width: 100%;
+    margin: 2em auto 0 auto;
+    background-color: black;
+}

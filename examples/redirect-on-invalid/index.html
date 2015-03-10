@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	
+	<meta charset="UTF-8">
+	
+	<title>jQuery.ageGate: easier with remote dialog</title>
+	
+	<link rel="stylesheet" href="../common.css">
+
+	<!-- If you don't want the user to see any content until they pass the age gate, put jQuery and jquery.ageGate in the <head> tag -->
+
+	<script src="../../bower_components/jquery/dist/jquery.js"></script>
+	<script src="../../jquery-age-gate.js"></script>
+
+	<script>
+
+		$(function () {
+			
+			$.ageGate({
+				dialogSrc: '../common-dialog.html'
+			});
+			
+			$('body').on('ageinvalidated', function () {
+				window.setTimeout(function () {
+					window.location.href = 'http://example.com';
+				}, 2000);
+			});
+			
+		});
+		
+	</script>
+
+
+</head>
+
+<body></body>
+
+</html>

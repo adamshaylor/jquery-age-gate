@@ -1,0 +1,26 @@
+node_modules
+bower_components
+
+# https://github.com/github/gitignore/blob/bc6f3751b2b49c2c4cf1dac7b3669bb9bd983e22/Global/OSX.gitignore
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
