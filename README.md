@@ -34,6 +34,8 @@ In your HTML:
 
 ## Usage
 
+First, you’ll need to build and style your age gate dialog element. See the [example stylesheet](examples/common.css).
+
 You can run the age gate with the default options inside a document ready handler like so:
 
 ```javascript
@@ -67,3 +69,12 @@ $(function () {
 ```
 
 Check out the [examples](examples) to see how the options can be used.
+
+## Promises and events
+
+The `$.ageGate()` function returns a jQuery promise which is resolved when the user enters a valid age that passes the age gate. There are also custom events, `agevalidated` and `ageinvalidated` that are triggered from the dialog element whenever the user’s input is checked.
+
+## Philosophy and disclaimer
+
+The goal of this project is to make the installation and adjustment of an age-gate on large existing sites as painless as possible. I make no claim regarding its efficacy, practical or legal.
+
