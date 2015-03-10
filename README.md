@@ -72,7 +72,7 @@ Check out the [examples](examples) to see how the options can be used.
 
 ## Promises and events
 
-The `$.ageGate()` function returns a jQuery promise which is resolved when the user enters a valid age that passes the age gate. There are also custom events, `agevalidated` and `ageinvalidated` that are triggered from the dialog element whenever the user’s input is checked.
+The `$.ageGate()` function returns a jQuery promise which is resolved when the user enters a valid age that meets the minimum requirement. There are also custom events, `agevalidated` and `ageinvalidated` that are triggered from the dialog element whenever the user’s input is parsed and evaluted.
 
 ## Philosophy and disclaimer
 
