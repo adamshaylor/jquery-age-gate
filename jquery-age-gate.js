@@ -94,6 +94,9 @@
 		}
 
 
+		deferredVerification.done(deactivateAgeGate);
+
+
 		function insertDialogAndActivate (dialogHtml) {
 
 			$dialog = $(dialogHtml).appendTo('body');
@@ -170,17 +173,7 @@
 
 			if (nowMinusMinumumAge >= birthdate) {
 
-				$dialog.removeClass(options.invalidAgeDialogClass);
-
-				$dialog.trigger('agevalidated');
-
-				deferredVerification.resolve($dialog);
-
-				deactivateAgeGate();
-
-				if ($.ageGateCookieAdapter) {
-					$.ageGateCookieAdapter.set(birthdate, options.expiration);
-				}
+				deferredVerification.resolve();
 
 			}
 
@@ -197,6 +190,12 @@
 
 		function deactivateAgeGate () {
 
+			$dialog.removeClass(options.invalidAgeDialogClass);
+
+			$dialog.trigger('agevalidated');
+
+			deferredVerification.resolve($dialog);
+
 			$dialog
 				.removeClass(options.activeDialogClass)
 				.off();
@@ -205,10 +204,14 @@
 				.removeClass(options.activeBackdropClass)
 				.off();
             
+            if ($.ageGateCookieAdapter) {
+            	$.ageGateCookieAdapter.set(birthdate, options.expiration);
+            }
+
 		}
 
 
-		return deferredVerification.promise();
+		return deferredVerification;
 
 
 	};
