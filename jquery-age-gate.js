@@ -37,24 +37,24 @@
 
 		if ($(options.whitelistSelector).length) {
 
-			return;
+			return deferredVerification;
 
 		}
 
 
 		// We could check the date but that would break the minimum age form control. We'll assume that if we set the cookie, the user passed the gate.
 
-		if (cookieBirthdate instanceof Date) {
+		if (cookieBirthdate !== undefined) {
 
-			return;
+			return deferredVerification;
 
 		}
 
 
 		$backdrop = $(document.createElement('div'))
 			.attr('id', options.backdropId);
-        
-        
+		
+		
 		// Try finding the dialog in the DOM
 
 		try {
@@ -71,21 +71,21 @@
 
 		if ($dialog.length) {
 
-            $dialog.before($backdrop);
+			$dialog.before($backdrop);
 
-            window.setTimeout(activateBackdrop, 0);
+			window.setTimeout(activateBackdrop, 0);
 
-            window.setTimeout(activateDialog, 0);
-            
+			window.setTimeout(activateDialog, 0);
+			
 		}
 
 		// If that doesn't work, try loading it over HTTP
 
 		else {
-            
-            $backdrop.appendTo('body');
-            
-            window.setTimeout(activateBackdrop, 0);
+			
+			$backdrop.appendTo('body');
+			
+			window.setTimeout(activateBackdrop, 0);
 
 			$.ajax({ url: options.dialogSrc })
 				.done(insertDialogAndActivate)
@@ -113,13 +113,13 @@
 			throw new Error('jQuery.ageGate was unable to find ' + options.dialogSrc);
 
 		}
-        
-        
-        function activateBackdrop () {
-                
-            $backdrop.addClass(options.activeBackdropClass);
+		
+		
+		function activateBackdrop () {
+				
+			$backdrop.addClass(options.activeBackdropClass);
 
-        }
+		}
 
 
 		function activateDialog () {
@@ -173,7 +173,7 @@
 
 			if (nowMinusMinumumAge >= birthdate) {
 
-				deferredVerification.resolve();
+				deferredVerification.resolve(birthdate);
 
 			}
 
@@ -188,7 +188,11 @@
 		}
 
 
-		function deactivateAgeGate () {
+		function deactivateAgeGate (birthdate) {
+
+			// Again, we aren't concerned with the value of the cookie, merely that it exists
+
+			birthdate = birthdate || true;
 
 			$dialog.removeClass(options.invalidAgeDialogClass);
 
@@ -203,10 +207,10 @@
 			$backdrop
 				.removeClass(options.activeBackdropClass)
 				.off();
-            
-            if ($.ageGateCookieAdapter) {
-            	$.ageGateCookieAdapter.set(birthdate, options.expiration);
-            }
+			
+			if ($.ageGateCookieAdapter) {
+				$.ageGateCookieAdapter.set(birthdate, options.expiration);
+			}
 
 		}
 
@@ -217,16 +221,16 @@
 	};
 
 
-    function defaultParseFunction () {
+	function defaultParseFunction () {
 
-        var birthYear = parseInt($('input[name="age-gate-year"]').val(), 10),
-            birthMonth = parseInt($('input[name="age-gate-month"]').val(), 10),
-            birthDay = parseInt($('input[name="age-gate-day"]').val(), 10),
-            birthdate = new Date(birthYear, birthMonth, birthDay);
+		var birthYear = parseInt($('input[name="age-gate-year"]').val(), 10),
+			birthMonth = parseInt($('input[name="age-gate-month"]').val(), 10),
+			birthDay = parseInt($('input[name="age-gate-day"]').val(), 10),
+			birthdate = new Date(birthYear, birthMonth, birthDay);
 
-        return birthdate;
+		return birthdate;
 
-    }
+	}
 
 
 })(jQuery);
