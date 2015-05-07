@@ -21,7 +21,10 @@
 
 	adapter.set = function setCookie (birthdate, expiryDays) {
 
-		$.cookie('jquery-age-gate', birthdate.valueOf().toString(), { expires: expiryDays });
+		$.cookie('jquery-age-gate', birthdate.valueOf().toString(), {
+			expires: expiryDays,
+			path: '/'
+		});
 
 	};
 
