@@ -168,7 +168,7 @@
 
 			var now = new Date(),
 				minimumAge = parseInt($dialog.find(options.minimumAgeSelector).val(), 10),
-				nowMinusMinumumAge = new Date(now.getFullYear() - minimumAge, now.getMonth(), now.getDay()),
+				nowMinusMinumumAge = new Date(now.getFullYear() - minimumAge, now.getMonth(), now.getDate()),
 				birthdate = options.parseUserDateFunction();
 
 			if (nowMinusMinumumAge >= birthdate) {
@@ -224,12 +224,11 @@
 	function defaultParseFunction () {
 
 		var birthYear = parseInt($('input[name="age-gate-year"]').val(), 10),
-			birthMonth = parseInt($('input[name="age-gate-month"]').val(), 10),
+			birthMonth = parseInt($('input[name="age-gate-month"]').val(), 10) - 1,
 			birthDay = parseInt($('input[name="age-gate-day"]').val(), 10),
 			birthdate = new Date(birthYear, birthMonth, birthDay);
 
 		return birthdate;
-
 	}
 
 
